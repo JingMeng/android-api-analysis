@@ -10,7 +10,7 @@ import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.idisfkj.androidapianalysis.utils.ActivityUtils
 import com.idisfkj.androidapianalysis.utils.LogUtils
-import kotlinx.android.synthetic.main.main_recycler_item_layout.view.*
+import android.widget.TextView
 
 /**
  * Created by idisfkj on 2018/4/18.
@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.main_recycler_item_layout.view.*
 class MainRecyclerItemVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun bindData(value: MainModel, position: Int) {
-        itemView.content.apply {
+        itemView.findViewById<TextView>(R.id.content).apply {
             text = value.content
             setOnClickListener {
                 if (position == 0) {

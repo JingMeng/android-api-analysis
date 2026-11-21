@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.idisfkj.androidapianalysis.R
-import kotlinx.android.synthetic.main.activity_web_view_article_layout.*
+import android.webkit.WebView
 
 /**
  * Created by idisfkj on 2018/4/23.
@@ -32,10 +32,11 @@ class WebViewArticleActivity : AppCompatActivity() {
         setContentView(R.layout.activity_web_view_article_layout)
         getExtraData()
         title = mTitle
+        val webView = findViewById<WebView>(R.id.webView)
         webView.settings.domStorageEnabled = true
         webView.settings.useWideViewPort = true            // 使用推荐窗口
         webView.settings.loadWithOverviewMode = true       // 设置加载模式
-        webView.loadUrl(mPath)
+        mPath?.let { webView.loadUrl(it) }
     }
 
     private fun getExtraData() {

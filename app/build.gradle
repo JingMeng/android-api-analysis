@@ -1,16 +1,19 @@
+import ProjectDependencies as Dependencies
+
 apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
 
-apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
+    namespace 'com.idisfkj.androidapianalysis'
     compileSdkVersion Versions.target_sdk
-    buildToolsVersion Versions.build_tools
+    buildFeatures { buildConfig true }
+    flavorDimensions 'mode', 'api'
     defaultConfig {
         applicationId "com.idisfkj.androidapianalysis"
         minSdkVersion Versions.min_sdk
@@ -23,6 +26,13 @@ android {
         config {
             storeFile file('key.store')
             keyAlias 'android'
+            def propsFile = rootProject.file('keystore.properties')
+            if (propsFile.exists()) {
+                def props = new Properties()
+                propsFile.withInputStream { props.load(it) }
+                keyPassword props['keyPassword']
+                storePassword props['storePassword']
+            }
         }
     }
 
@@ -31,12 +41,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
 
     buildTypes {
@@ -44,7 +54,7 @@ android {
             minifyEnabled false
             zipAlignEnabled false
             shrinkResources false
-            signingConfig signingConfigs.config
+            signingConfig signingConfigs.debug
         }
         outer {
             minifyEnabled false
@@ -60,8 +70,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    //组合多个产品风格与纬度
-    flavorDimensions "mode", "api"
+    //?????????????????    flavorDimensions "mode", "api"
     productFlavors {
         dev {
             applicationIdSuffix ".dev"
@@ -81,13 +90,13 @@ android {
         }
         minApi16 {
             dimension "api"
-            minSdkVersion 16
+            minSdk 16
             versionCode 10000 + android.defaultConfig.versionCode
             versionNameSuffix "-minApi16"
         }
         minApi21 {
             dimension "api"
-            minSdkVersion 21
+            minSdk 16
             versionCode 20000 + android.defaultConfig.versionCode
             versionNameSuffix "-minApi21"
         }
@@ -101,7 +110,7 @@ android {
         }
     }
 
-    // 过滤变体
+    // ??????
     variantFilter { variant ->
         def names = variant.flavors*.name
         if (names.contains("minApi16") && names.contains("dev")) {
@@ -109,22 +118,11 @@ android {
         }
     }
 //    sourceSets {
-//        //设置默认main源集配置
+//        //??????main??????
 //        main {
 //            res.srcDirs = ['src/prodMinApi21Release/res']
 //        }
 //    }
-}
-
-afterEvaluate {
-    def propsFile = rootProject.file('keystore.properties')
-    def configName = 'config'
-    if (propsFile.exists() && android.signingConfigs.hasProperty(configName)) {
-        def props = new Properties()
-        props.load(new FileInputStream(propsFile))
-        android.signingConfigs[configName].keyPassword = props['keyPassword']
-        android.signingConfigs[configName].storePassword = props['storePassword']
-    }
 }
 
 dependencies {
@@ -166,3 +164,6 @@ dependencies {
     androidTestImplementation Dependencies.runner
     androidTestImplementation Dependencies.espresso_core
 }
+
+
+

@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.idisfkj.androidapianalysis.MainModel
 import com.idisfkj.androidapianalysis.R
 import com.idisfkj.androidapianalysis.utils.ActivityUtils
-import kotlinx.android.synthetic.main.activity_paint_layout.*
 
 /**
  * Created by idisfkj on 2018/5/19.
@@ -24,7 +23,7 @@ class PaintActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun setupListener() {
-        code_analysis.setOnClickListener(this)
+        findViewById<View>(R.id.code_analysis).setOnClickListener(this)
     }
 
     private fun getExtraData(): MainModel = intent?.extras?.getParcelable(ActivityUtils.EXTRA_DATA) ?:

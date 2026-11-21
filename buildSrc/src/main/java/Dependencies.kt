@@ -7,13 +7,13 @@ import java.net.URI
  */
 object Versions {
     const val support = "28.0.0"
-    const val kotlin = "1.3.50"
+    const val kotlin = "1.9.22"
     const val constraint_layout = "1.1.0-beta6"
     const val runner = "1.0.1"
     const val espresso_core = "3.0.1"
     const val junit = "4.12"
-    const val gradle = "3.4.1"
-    const val target_sdk = 28
+    const val gradle = "8.2.1"
+    const val target_sdk = 34
     const val min_sdk = 16
     const val build_tools = "28.0.3"
     const val arch_version = "2.2.0-alpha01"
@@ -30,13 +30,13 @@ object Versions {
     const val core_ktx = "1.0.0"
 }
 
-object Dependencies {
-    const val app_compat = "com.android.support:appcompat-v7:${Versions.support}"
-    const val recyclerView = "com.android.support:recyclerview-v7:${Versions.support}"
+object ProjectDependencies {
+    const val app_compat = "androidx.appcompat:appcompat:1.1.0"
+    const val recyclerView = "androidx.recyclerview:recyclerview:1.0.0"
     const val kotlin_stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
     const val kotlin_plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
     const val junit = "junit:junit:${Versions.junit}"
-    const val constraint_layout = "com.android.support.constraint:constraint-layout:${Versions.constraint_layout}"
+    const val constraint_layout = "androidx.constraintlayout:constraintlayout:1.1.3"
     const val runner = "com.android.support.test:runner:${Versions.runner}"
     const val espresso_core = "com.android.support.test.espresso:espresso-core:${Versions.espresso_core}"
     const val gradle_plugin = "com.android.tools.build:gradle:${Versions.gradle}"
@@ -60,13 +60,12 @@ object Dependencies {
     const val work_runtime = "androidx.work:work-runtime-ktx:${Versions.work_version}"
     const val nav_fragment = "androidx.navigation:navigation-fragment-ktx:${Versions.nav_version}"
     const val nav_ui = "androidx.navigation:navigation-ui-ktx:${Versions.nav_version}"
-    const val nav_safe_args_plugin = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.nav_version}"
+    const val nav_safe_args_plugin = "androidx.navigation:navigation-safe-args-gradle-plugin:2.7.7"
     const val core_ktx = "androidx.core:core-ktx:${Versions.core_ktx}"
 
     val addRepos: (handler: RepositoryHandler) -> Unit = {
         it.google()
-        it.jcenter()
-        it.maven { url = URI("https://oss.sonatype.org/content/repositories/snapshots") }
+        it.mavenCentral()
     }
 }
 

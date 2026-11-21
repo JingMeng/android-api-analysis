@@ -8,7 +8,6 @@ import com.idisfkj.androidapianalysis.MainModel
 import com.idisfkj.androidapianalysis.R
 import com.idisfkj.androidapianalysis.utils.ActivityUtils
 import com.idisfkj.androidapianalysis.webview.WebViewArticleActivity
-import kotlinx.android.synthetic.main.activity_constraint_layout.*
 
 /**
  * Created by idisfkj on 2018/4/24.
@@ -28,14 +27,14 @@ class ConstraintLayoutActivity : AppCompatActivity(), View.OnClickListener {
             intent?.extras?.getParcelable(ActivityUtils.EXTRA_DATA) ?: throw NullPointerException("intent or extras is null")
 
     private fun setupListener() {
-        normal.setOnClickListener(this)
-        margin.setOnClickListener(this)
-        circle.setOnClickListener(this)
-        chain.setOnClickListener(this)
-        guideLine.setOnClickListener(this)
-        barrierAndGroup.setOnClickListener(this)
-        other.setOnClickListener(this)
-        relative_article.setOnClickListener {
+        findViewById<View>(R.id.normal).setOnClickListener(this)
+        findViewById<View>(R.id.margin).setOnClickListener(this)
+        findViewById<View>(R.id.circle).setOnClickListener(this)
+        findViewById<View>(R.id.chain).setOnClickListener(this)
+        findViewById<View>(R.id.guideLine).setOnClickListener(this)
+        findViewById<View>(R.id.barrierAndGroup).setOnClickListener(this)
+        findViewById<View>(R.id.other).setOnClickListener(this)
+        findViewById<View>(R.id.relative_article).setOnClickListener {
             WebViewArticleActivity.navigationPage(this, "ConstraintLayout使用汇总", "https://idisfkj.github.io/2018/05/03/ConstraintLayout%E4%BD%BF%E7%94%A8%E6%B1%87%E6%80%BB/")
         }
     }

@@ -1,7 +1,7 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+import ProjectDependencies as Dependencies
 
 buildscript {
-    Dependencies.addRepos.invoke(repositories)
+    repositories { google(); mavenCentral() }
     dependencies {
         classpath Dependencies.gradle_plugin
         classpath Dependencies.kotlin_plugin
@@ -13,7 +13,7 @@ buildscript {
 }
 
 allprojects {
-    Dependencies.addRepos.invoke(repositories)
+    repositories { google(); mavenCentral() }
 }
 
 task clean(type: Delete) {

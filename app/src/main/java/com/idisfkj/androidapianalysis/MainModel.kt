@@ -11,9 +11,9 @@ data class MainModel(val content: String, val type: Int,
                      val title: String, val layoutId: Int) : Parcelable {
 
     constructor(parcel: Parcel) : this(
-            parcel.readString(),
+            requireNotNull(parcel.readString()) { "Missing content in parcel" },
             parcel.readInt(),
-            parcel.readString(),
+            requireNotNull(parcel.readString()) { "Missing title in parcel" },
             parcel.readInt())
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

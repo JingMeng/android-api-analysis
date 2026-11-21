@@ -12,7 +12,8 @@ import com.idisfkj.androidapianalysis.R
 import com.idisfkj.androidapianalysis.utils.ActivityUtils
 import com.idisfkj.androidapianalysis.utils.LogUtils
 import com.idisfkj.androidapianalysis.webview.WebViewArticleActivity
-import kotlinx.android.synthetic.main.activity_bitmap.*
+import android.widget.ImageView
+import android.widget.TextView
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -22,6 +23,10 @@ import java.io.FileOutputStream
  * Email : idisfkj@gmail.com.
  */
 class BitmapActivity : AppCompatActivity(), View.OnClickListener {
+    private val image_view get() = findViewById<ImageView>(R.id.image_view)
+    private val sub_image_view get() = findViewById<ImageView>(R.id.sub_image_view)
+    private val image_view_text get() = findViewById<TextView>(R.id.image_view_text)
+    private val sub_image_view_text get() = findViewById<TextView>(R.id.sub_image_view_text)
 
     private lateinit var scaleBitmap: Bitmap
     private var bitmapBitmap: Bitmap? = null
@@ -44,10 +49,10 @@ class BitmapActivity : AppCompatActivity(), View.OnClickListener {
                     ?: throw NullPointerException("intent or extras is null")
 
     private fun setupListener() {
-        create_bitmap.setOnClickListener(this)
-        create_scaled_bitmap.setOnClickListener(this)
-        decode_file.setOnClickListener(this)
-        relative_article.setOnClickListener(this)
+        findViewById<View>(R.id.create_bitmap).setOnClickListener(this)
+        findViewById<View>(R.id.create_scaled_bitmap).setOnClickListener(this)
+        findViewById<View>(R.id.decode_file).setOnClickListener(this)
+        findViewById<View>(R.id.relative_article).setOnClickListener(this)
     }
 
     private fun initBitmap() {
